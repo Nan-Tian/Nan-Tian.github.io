@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    [洛谷] P4296 密码箱 |  SuperTNT
+    数学学习笔记 |  SuperTNT
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-题解/密码箱"
+  id="post-学习笔记/数学"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,14 +55,14 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  [洛谷] P4296 密码箱
+  数学学习笔记
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/%E5%AF%86%E7%A0%81%E7%AE%B1/" class="article-date">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/" class="article-date">
   <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
 </a>   
 <div class="word_count">
@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">270</span>
+            <span class="post-count">985</span>
         </span>
     </span>
 
@@ -79,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">4 分钟</span>
         </span>
     </span>
 </div>
@@ -94,18 +94,42 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="P4296-密码箱"><a href="#P4296-密码箱" class="headerlink" title="P4296 密码箱"></a>P4296 密码箱</h1><p>题目可转化为$x^2\equiv 1 \pmod n$，</p>
-<p>移项可得$x^2-1 \equiv 0\pmod n$</p>
-<p>根据平方差公式可以得到$(x-1)(x+1)\equiv 0 \pmod n$</p>
-<p>设正整数$k$，使得$(x-1)(x+1)=kn$</p>
-<p>对$n$进行分解,$n= ab$</p>
-<p>原式最终转化为$(x-1)(x+1)=kab$</p>
-<p>则使原式成立条件即为$(a|(x+1) \bigvee b|(x-1))\bigwedge (a|(x-1)\bigvee b|(x+1))$</p>
-<p>在枚举$x$的时候顺便枚举$a,b$</p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.当$x=1$时是唯一无解情况</p>
-<p>2.记住开$long long$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> TNT</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> b, n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">&quot;None&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        st.insert(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">1</span>; a &lt;= <span class="built_in">sqrt</span>(n); a++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(n % a))</span><br><span class="line">            &#123;</span><br><span class="line">                b = n / a;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (ll i = b + <span class="number">1</span>; i &lt;= n; i += b) <span class="comment">//4e9会爆int</span></span><br><span class="line">                    <span class="keyword">if</span> (!((i + <span class="number">1</span>) % a))</span><br><span class="line">                        st.insert(i);</span><br><span class="line">                <span class="keyword">for</span> (ll i = b - <span class="number">1</span>; i &lt;= n; i += b)</span><br><span class="line">                    <span class="keyword">if</span> (!((i - <span class="number">1</span>) % a))</span><br><span class="line">                        st.insert(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator i = st.begin(); i != st.end(); i++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="comment">// namespace TNT</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TNT::main();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <h1 id="数学学习笔记"><a href="#数学学习笔记" class="headerlink" title="数学学习笔记"></a>数学学习笔记</h1><blockquote>
+<h2 id="一、初等数论"><a href="#一、初等数论" class="headerlink" title="一、初等数论"></a>一、<a href="#%E5%88%9D%E7%AD%89%E6%95%B0%E8%AE%BA">初等数论</a></h2><h2 id="二、期望"><a href="#二、期望" class="headerlink" title="二、期望"></a>二、<a href="#%E6%9C%9F%E6%9C%9B">期望</a></h2><h3 id="一、-初等数论"><a href="#一、-初等数论" class="headerlink" title="一、 初等数论"></a>一、<a id="初等数论"> <a href="#%E6%95%B0%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">初等数论</a></a></h3><h4 id="1-算术基本定理"><a href="#1-算术基本定理" class="headerlink" title="1.  算术基本定理"></a>1.  算术基本定理</h4><h5 id="概念-：任意一个正整数-N-gt-1-可分为有限个质数的乘积。"><a href="#概念-：任意一个正整数-N-gt-1-可分为有限个质数的乘积。" class="headerlink" title="概念 ：任意一个正整数$N$ &gt;1,可分为有限个质数的乘积。"></a>概念 ：任意一个正整数$N$ &gt;1,可分为有限个质数的乘积。</h5><h5 id="数学表示："><a href="#数学表示：" class="headerlink" title="数学表示："></a>数学表示：</h5><p>$$<br>N=2^{a_1}\times3^{a_2}\times5^{a_3}\times\cdots=\prod_{k=1}^\infty p_k^{a_k}<br>$$<br>其中 $a_1,a_2\cdots\in N$，我们称这个分解为 $N$的标准分解。</p>
+<h4 id="2-素数无限定理"><a href="#2-素数无限定理" class="headerlink" title="2.素数无限定理"></a>2.素数无限定理</h4><h5 id="概念：正整数中有无限个素数。"><a href="#概念：正整数中有无限个素数。" class="headerlink" title="概念：正整数中有无限个素数。"></a>概念：正整数中有无限个素数。</h5><h5 id="证明："><a href="#证明：" class="headerlink" title="证明："></a>证明：</h5><h6 id="反证法："><a href="#反证法：" class="headerlink" title="反证法："></a>反证法：</h6><p>​                        假设有有限个素数,共为n个素数，设S<br>$$<br>S=1+\prod_{i=1}^n p_i<br>$$<br>​                        若N为素数，则显然不成立。</p>
+<p>​                        若N为合数，$p_1\times p_2\times \cdots\times p_n  与S互质\left(gcd\left(S,S-1\right)=1,因此S不能被已知任意素数整除\right)$，与算术基本定理相矛盾，不成立。</p>
+<h4 id="3-约数个数定理"><a href="#3-约数个数定理" class="headerlink" title="3.约数个数定理"></a>3.约数个数定理</h4><p>$$<br>ans=\prod_{i=1}^n (a_i+1)  \left( a_i为N标准分解后素数的指数\right)<br>$$</p>
+<p>$$<br>简单证明正确性：N=2^{a_1}\times3^{a_2}\times5^{a_3}\times\cdots=\prod_{k=1}^\infty p_k^{a_k}<br>\<br>{p_1}^{a_1}的约数有{p_1}^0,{p_1}^1\cdots,{p_1}^{a_1}共有\left(a_1+1\right)个,p_2,p_3\cdots,p_n与此相同<br>\<br>最后根据乘法定理：N的约数个数即为\left(a_1+1\right)\times \left(a_2+1\right)\times\cdots\times \left(a_n+1\right)<br>$$</p>
+<p>​                    </p>
+<h4 id="4-约数和定理"><a href="#4-约数和定理" class="headerlink" title="4.约数和定理"></a>4.约数和定理</h4><p>$$<br>ans=\prod_{i=1}^n\sum_{j=0}^{a_i} p_i^j<br>$$</p>
+<h4 id="5-GCD与LCM"><a href="#5-GCD与LCM" class="headerlink" title="5.GCD与LCM"></a>5.GCD与LCM</h4><h5 id="GCD与LCM集合含义："><a href="#GCD与LCM集合含义：" class="headerlink" title="GCD与LCM集合含义："></a>GCD与LCM集合含义：</h5><p>$$<br>gcd\left(a,b\right)=\prod_{i=1}^n {p_i}^{min\left(a_i,b_i\right)}<br>\<br>lcm\left(a,b\right)=\prod_{i=1}^n {p_i}^{max\left(a_i,b_i\right)}<br>$$</p>
+<h5 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h5><p>$\left(1\right)GCD\left(a,b\right)=1$,那么a$,$b互质</p>
+<p>$\left(2\right)gcd\left(2a,a\right)=gcd\left(a,a\right)=gcd\left(a,0\right)=a$</p>
+<p>$\left(3\right)lcm\left(a,b\right)gcd\left(a,b\right)=ab$</p>
+<h5 id="证明：-1"><a href="#证明：-1" class="headerlink" title="证明："></a>证明：</h5><p>$$<br>gcd\left(a,b\right)为a,b所有相同质因子最小幂的乘积;<br>\<br>lcm\left(a,b\right)为a,b所有相同质因子最大幂的乘积;<br>\</p>
+<p>\</p>
+<p>\begin{aligned}<br>\<br>lcm\left(a,b\right)gcd\left(a,b\right)即为a,b所有相同质因子幂的乘积,所以lcm\left(a,b\right)gcd\left(a,b\right)=ab;<br>\end{aligned}<br>$$</p>
+<p>$\left(4\right)gcd\left(n,n+1\right)=1$</p>
+<h5 id="证明：-2"><a href="#证明：-2" class="headerlink" title="证明："></a>证明：</h5><h6 id="反证法：-1"><a href="#反证法：-1" class="headerlink" title="反证法："></a>反证法：</h6><p>$$<br>\begin{aligned}<br>\<br>&amp;假设n,n+1有相同的大于1的公因子m<br>\<br>&amp;n=mx,n+1=my;\left(x,y均为整数\right)<br>\<br>&amp;(n+1)-n=m(y-x);m(y-x)=1;<br>\<br>&amp;\because m大于0,y、x均为整数<br>\<br>&amp;\therefore m(y-x)<br>\<br>&amp;\therefore 假设不成立</p>
+<p>\end{aligned}<br>$$</p>
+<h4 id="6-更相减损法"><a href="#6-更相减损法" class="headerlink" title="6.更相减损法"></a>6.更相减损法</h4><p>（1）$gcd\left(a,b\right)=gcd\left(a,a-b\right)$</p>
+<p>$$<br>设gcd\left(a,b\right)=m,a=mx,b=my,\left(x,y均为整数且a&gt;b\right);<br>\<br>则a-b=m\left(x-y\right);<br>\<br>\therefore m整除\left(a-b\right)<br>\<br>\therefore gcd\left(a,b\right)=gcd\left(a,a-b\right)<br>$$<br>（2）$gcd\left(2a,2b\right)=2\times gcd\left(a,b\right)$</p>
+<p>（3）$gcd\left(2a,b\right)=gcd\left(a,b\right)$</p>
+<h4 id="7-辗转相除法（欧几里得算法）"><a href="#7-辗转相除法（欧几里得算法）" class="headerlink" title="7.辗转相除法（欧几里得算法）"></a>7.辗转相除法（欧几里得算法）</h4><h5 id="先行知识"><a href="#先行知识" class="headerlink" title="先行知识:"></a>先行知识:</h5><p>​        正整数$a,b\left(a&gt;b\right)$ ，$a%b$可以表示为$a=kb+c$,那么$gcd\left(a,b\right)=gcd\left(b,a%b\right)$</p>
+<h5 id="算法过程："><a href="#算法过程：" class="headerlink" title="算法过程："></a>算法过程：</h5><p>​        由$ gcd(a, b) = gcd(b, a%b),$令$ a ′ = b, b ′ = a%b$递归调用$ gcd(a ′ , b ′ )，$返回$gcd(a, b) = gcd(a’,b’)$</p>
+<h5 id="递归边界："><a href="#递归边界：" class="headerlink" title="递归边界："></a>递归边界：</h5><p>​        若较小的数 $b = 0，$由性质$gcd(a, 0) = a，$得到当前的结果为 $a$</p>
+<h5 id="正确性证明："><a href="#正确性证明：" class="headerlink" title="正确性证明："></a>正确性证明：</h5><p>​        对于取模运算有$a%b=a-\lfloor\frac{a}{b}\rfloor b$，那么设$gcd(a,b)=d$。</p>
+<p>​        $d|a,d|b,$同理可知$d|(a%b)$,因此$gcd(a,b)=gcd(a,a%b)=gcd(b,a%b)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll a, ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> b ? gcd(b, a % b) : a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+<h4 id="8-裴蜀定理（贝祖定理）"><a href="#8-裴蜀定理（贝祖定理）" class="headerlink" title="8.裴蜀定理（贝祖定理）"></a>8.裴蜀定理（贝祖定理）</h4><h5 id="内容："><a href="#内容：" class="headerlink" title="内容："></a>内容：</h5><p>​    设 $a,b$是不全为零的整数，则存在整数$x,y$使得 $ax + by = gcd(a, b)$ .</p>
+<h5 id="特殊情况："><a href="#特殊情况：" class="headerlink" title="特殊情况："></a>特殊情况：</h5><p>$a,b$互质的时候存在整数$x,y$使$ax+by=1$</p>
+<h4 id="9-扩展欧几里得定理"><a href="#9-扩展欧几里得定理" class="headerlink" title="9.扩展欧几里得定理"></a>9.扩展欧几里得定理</h4><h5 id="内容：-1"><a href="#内容：-1" class="headerlink" title="内容："></a>内容：</h5><p>已知整数$a,b,$求方程$ax+by=gcd\left(a,b\right)$的一组解​</p>
+<p>对于取模运算有$a%b=a-\lfloor\frac{a}{b}\rfloor b$</p>
+<h4 id="扩展欧拉定理"><a href="#扩展欧拉定理" class="headerlink" title="扩展欧拉定理"></a>扩展欧拉定理</h4><h3 id="二、-期望"><a href="#二、-期望" class="headerlink" title="二、 期望 "></a>二、<a id="期望"> <a href="#%E6%95%B0%E5%AD%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">期望</a> </a></h3><p>1.$E\left(X\right)^2$(期望的平方),$E\left(X^2\right)$(平方的期望) </p>
+</blockquote>
  
       <!-- reward -->
       
@@ -134,19 +158,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/UVA1521/" class="article-nav-link">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Miller-Rabin/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            [UVA] UVA 1521 GCD Gussing Game
+            Miller-Rabin
           
         </div>
       </a>
     
     
-      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%88%86%E5%9D%97/" class="article-nav-link">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">分块学习笔记</div>
+        <div class="article-nav-title">欧拉函数</div>
       </a>
     
   </nav>

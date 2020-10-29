@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    分块学习笔记 |  SuperTNT
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-学习笔记/分块"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  分块学习笔记
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%88%86%E5%9D%97/" class="article-date">
+  <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">25 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="分块学习笔记"><a href="#分块学习笔记" class="headerlink" title="分块学习笔记"></a>分块学习笔记</h1><p>分块思想：</p>
+<p>​                    分块算法的思想是通过适当的划分，预处理一部分信息保存下来，用空间换取时间，达到时空平衡。</p>
+<p>​                    基本操作是，将一段序列，分成一定数量的块，每一块有一个长度，表示一段区间。</p>
+<p>​                    不完整的块暴力处理。</p>
+<p>分块大纲：分块，找区间，进行处理</p>
+<p>​                    1.判断区间是否在一个块里</p>
+<p>​                    2.在一个块里直接暴力处理</p>
+<p>​                    3.不在一个块里中间整体的块整体处理，左边右边的块暴力处理</p>
+<p><font color=00BFF size=4><strong>以下点击题目直接跳转题目所在链接</strong></font></p>
+<h2 id="分块入门9练："><a href="#分块入门9练：" class="headerlink" title="分块入门9练："></a><a href="%5Bhttps://loj.ac/problems/search?keyword=%E5%88%86%E5%9D%97%5D(https://loj.ac/problems/search?keyword=%E5%88%86%E5%9D%97)">分块入门9练</a>：</h2><h3 id="（-为了方便将数的大小称为权值，标记的大小称为贡献-）"><a href="#（-为了方便将数的大小称为权值，标记的大小称为贡献-）" class="headerlink" title="（  为了方便将数的大小称为权值，标记的大小称为贡献 ）"></a><em>（<font color=#FF7F>  为了方便将数的大小称为权值，标记的大小称为贡献 </font>）</em></h3><h3 id="1-区间加，查询区间某一个元素"><a href="#1-区间加，查询区间某一个元素" class="headerlink" title="1.区间加，查询区间某一个元素"></a>1.区间加，查询区间某一个元素</h3><p>区间加：不完整的块直接暴力修改权值，完整的块设一个lazy标记，将增加的权值存到lazy标记中，每次对整块修改都是O（1）修改</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">50010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,block;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ = <span class="number">250</span>;<span class="comment">//块的多少（n/block）</span></span><br><span class="line"></span><br><span class="line">ll w[MAXN], b[MAXN], lazy[block_ + <span class="number">1</span>];<span class="comment">//lazy数组大小只要开块大小足够</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x, ll y, ll z)</span><span class="comment">//注意处理的细节，取值范围不要弄错！！！！！！！</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)<span class="comment">//处理左端点所在的不完整的块</span></span><br><span class="line">        w[i] += z;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])<span class="comment">//如果左右端点不在一个块里处理右端点所在的不完整的块</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">            w[i] += z;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)<span class="comment">//处理中间完整的区间</span></span><br><span class="line">        lazy[i] += z;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            add(x, y, z);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; w[y] + lazy[b[y]] &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//更改后的权值加上完整块标记的lazy标记的权值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-区间加，区间查询小于某数的元素个数"><a href="#2-区间加，区间查询小于某数的元素个数" class="headerlink" title="2.区间加，区间查询小于某数的元素个数"></a>2.区间加，区间查询小于某数的元素个数</h3><p>思路：我们先来思考只有询问操作的情况，不完整的块枚举统计即可；而要在每个整块内寻找小于一个值的元素数，于是我们不得不                    要求块内元素是有序的，这样就能使用二分法对块内查询，<font color=#7FF0>需要预处理时每块做一遍排序 </font>，复杂度$O(nlogn)$，每次查询在                    $\sqrt n$个块内二分，以及暴力$2\sqrt n$个元素，总复杂度$O(nlogn + n\sqrt n log\sqrt n)$</p>
+<p>区间加：维护一个lazy标记，略有区别的地方在于，不完整的块修改后可能会使得该块内数字乱序，所以头尾两个不完整块需要重新                        排序。</p>
+<p>区间查询：块外还是暴力，查询小于（z– lazy）的元素个数，块内用（z – lazy）作为二分的值即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, block;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">5e4</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> w[MAXN], b[MAXN], lazy[block_];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[block_];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spread</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//将不完整的块压入向量重新排序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	v[x].clear();</span><br><span class="line">	<span class="keyword">int</span> l = (x - <span class="number">1</span>) * block + <span class="number">1</span>, r = min(x * block, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=l;i&lt;=r;i++) v[x].push_back(w[i]);</span><br><span class="line">	sort(v[x].begin(), v[x].end());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">		w[i] += z;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">			w[i] += z;</span><br><span class="line">        spread(b[y]);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">		lazy[i] += z;</span><br><span class="line">	spread(b[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">ans</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> big = z * z;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">		<span class="keyword">if</span> (w[i] + lazy[b[i]] &lt; big)</span><br><span class="line">			sum++;</span><br><span class="line">	<span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">			<span class="keyword">if</span> (w[i] + lazy[b[i]] &lt; big)</span><br><span class="line">				sum++;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">		sum+=lower_bound(v[i].begin(), v[i].end(), big - lazy[i]) - v[i].begin();<span class="comment">//STL大法好，自带二分查找，查找第一个大于等于查找元素的下标（vector从0开始）</span></span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">	block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">		b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">		v[b[i]].push_back(w[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= b[n]; i++)</span><br><span class="line">		sort(v[i].begin(), v[i].end());</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">		<span class="keyword">if</span> (!opt)</span><br><span class="line">			add(x, y, z);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; ans(x, y, z) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-区间加，区间查询小于某个值的前驱（即比该值小的最大元素）"><a href="#3-区间加，区间查询小于某个值的前驱（即比该值小的最大元素）" class="headerlink" title="3.区间加，区间查询小于某个值的前驱（即比该值小的最大元素）"></a>3.区间加，区间查询小于某个值的前驱（即比该值小的最大元素）</h3><p>思路与 <font size=4><strong>2.</strong></font> 差不多，只不过把二分稍做修改就行了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line">ll n, block;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll MAXN = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll block_ = <span class="number">320</span>;</span><br><span class="line"></span><br><span class="line">ll w[MAXN], b[MAXN], lazy[block_];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; v[block_];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spread</span><span class="params">(ll x)</span><span class="comment">//处理块</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    v[x].clear();<span class="comment">//先将这块清零</span></span><br><span class="line">    ll l = (x - <span class="number">1</span>) * block + <span class="number">1</span>, r = min(x * block, n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = l; i &lt;= r; i++)</span><br><span class="line">        v[x].push_back(w[i]);<span class="comment">//重新加入可能改变的权值</span></span><br><span class="line">    sort(v[x].begin(), v[x].end());<span class="comment">//重新排序</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x, ll y, ll z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (ll i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">        w[i] += z;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">    &#123;    </span><br><span class="line">        <span class="keyword">for</span> (ll i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">            w[i] += z;</span><br><span class="line">        spread(b[y]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">        lazy[i] += z;</span><br><span class="line">    spread(b[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">ans</span><span class="params">(ll x, ll y, ll z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll sum = <span class="number">-1e9</span>;<span class="comment">//设该数为一个负数，防止数据有负数导致锅了</span></span><br><span class="line">    <span class="keyword">for</span> (ll i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">        <span class="keyword">if</span> (w[i] + lazy[b[x]] &lt; z)</span><br><span class="line">            sum = max(sum, w[i] + lazy[b[x]]);</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">        <span class="keyword">for</span> (ll i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">            <span class="keyword">if</span> (w[i] + lazy[b[y]] &lt; z)</span><br><span class="line">                sum = max(sum, w[i] + lazy[b[y]]);</span><br><span class="line">    <span class="keyword">for</span> (ll i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> p = lower_bound(v[i].begin(), v[i].end(), z - lazy[i]) - v[i].begin();</span><br><span class="line">        <span class="keyword">if</span> (!p)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            sum = max(sum, v[i][p - <span class="number">1</span>] + lazy[i]);<span class="comment">//注意细节存储位置为p-1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum != <span class="number">-1e9</span>)</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    <span class="keyword">else</span><span class="comment">//没有更新即为不存在返回-1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">        b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">        v[b[i]].push_back(w[i]);<span class="comment">//将每块将权值加入vector中，预处理一下</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= b[n]; i++)</span><br><span class="line">        sort(v[i].begin(), v[i].end());<span class="comment">//将每块的权值排序</span></span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ll opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            add(x, y, z);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans(x, y, z) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-区间加，区间求和"><a href="#4-区间加，区间求和" class="headerlink" title="4.区间加，区间求和"></a>4.区间加，区间求和</h4><p>思路：仍是一个lazy标记，不过设个sum数组，维护每块的和，预处理一下</p>
+<p>区间加：不完整的块贡献直接加到权值上，sum也加上贡献，完整的块sum加的贡献为整块的贡献</p>
+<p>区间求和：不完整的块权值直接累加到答案上，完整的块将sum数组的值累加到答案上</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll MAXN = <span class="number">5e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> ll block_ = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line">ll n, block, lazy[block_], b[MAXN], w[MAXN], sum[block_];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll x, ll y, ll z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        w[i] += z;</span><br><span class="line">        sum[b[i]] += z;<span class="comment">//区间加</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            w[i] += z;</span><br><span class="line">            sum[b[i]] += z;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        lazy[i] += z;</span><br><span class="line">        sum[i] += z * block;<span class="comment">//区间加（与线段树相似）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">answer</span><span class="params">(ll x, ll y, ll z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    ll mod = z + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">        ans = (ans + w[i] + lazy[b[i]]) % mod;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">            ans = (ans + w[i] + lazy[b[i]]) % mod;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">        ans = (ans + sum[i]) % mod;</span><br><span class="line">    <span class="keyword">return</span> ans % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">        b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">        sum[b[i]] += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            add(x, y, z);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; answer(x, y, z) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-区间开方，区间求和"><a href="#5-区间开方，区间求和" class="headerlink" title="5.区间开方，区间求和"></a>5.区间开方，区间求和</h4><p>区间开方：开方比较难，但该题是下取整，而一个数开过几次根以后就会变成0或1，不完整的块直接暴力，完整的块这些块经过几次                            操作以后就会都变成 0 / 1，于是我们采取一种分块优化的暴力做法，开一个flag标记，只要每个整块暴力开方后，记录                            一下元素是否都变成了 0 / 1，区间修改时跳过那些全为 0 / 1 的块即可。</p>
+<p>区间求和：不完整的块ans直接加上w[i],整块一直是用sum数组，因此ans直接加上sum权值即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">5e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> block, flag[block_], sum[block_], w[MAXN], b[MAXN], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spread</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//整块修改</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (flag[x])<span class="comment">//如果该块标记不为0，则返回</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    flag[x] = <span class="number">1</span>;<span class="comment">//先更改标记</span></span><br><span class="line">    sum[x] = <span class="number">0</span>;<span class="comment">//清零</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = (x - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= min(x * block, n); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        w[i] = <span class="built_in">sqrt</span>(w[i]);</span><br><span class="line">        sum[x] += w[i];</span><br><span class="line">        <span class="keyword">if</span> (w[i] &gt; <span class="number">1</span>)<span class="comment">//只要有一个不为0/1</span></span><br><span class="line">            flag[x] = <span class="number">0</span>;<span class="comment">//flag标记就为0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        sum[b[i]] -= w[i];</span><br><span class="line">        w[i] = <span class="built_in">sqrt</span>(w[i]);</span><br><span class="line">        sum[b[i]] += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum[b[i]] -= w[i];</span><br><span class="line">            w[i] = <span class="built_in">sqrt</span>(w[i]);</span><br><span class="line">            sum[b[i]] += w[i];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">        spread(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">answer</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">        ans += w[i];</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">            ans += w[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">        ans += sum[i];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">        b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">        sum[b[i]] += w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            add(x, y);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; answer(x, y) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-单点插入，单点查询"><a href="#6-单点插入，单点查询" class="headerlink" title="6.单点插入，单点查询"></a>6.单点插入，单点查询</h4><p> 单点插入：对于插入一个块内的元素不多时，可以直接暴力插入，将块内的元素往后移即可，但当插入一个块内的元素过多，大大                            大于$\sqrt n$时，块内暴力复杂度就不能保证了，这时就要重新分块，每$\sqrt n$次插入后，重新把数列平均分一下块，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e5</span> + <span class="number">20</span>;<span class="comment">//注意大小，n个数据，n次插入要开双倍</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ =<span class="number">800</span>;<span class="comment">//与上同理</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, block, w[MAXN], tot,T;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[block_];<span class="comment">//向量维护</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span><span class="comment">//重新分块</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tot)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v[i].size();j++)</span><br><span class="line">                w[++pos] = v[i][j];<span class="comment">//先将权值重新分配</span></span><br><span class="line">            v[i].clear();<span class="comment">//清零</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);<span class="comment">//重新分块</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        v[(i<span class="number">-1</span>)/block+<span class="number">1</span>].push_back(w[i]);</span><br><span class="line">    tot=(n<span class="number">-1</span>)/block+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt;= v[i].size())<span class="comment">//寻找x在第几块</span></span><br><span class="line">        &#123;</span><br><span class="line">            n++;</span><br><span class="line">            v[i].insert(v[i].begin() + x - <span class="number">1</span>, z);<span class="comment">//单点插入注意插入位置是x的左边</span></span><br><span class="line">            <span class="keyword">if</span> (v[i].size() &gt;= <span class="number">2</span> * block)<span class="comment">//如果该块的大小大于2*block就要重新分块</span></span><br><span class="line">                build();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       x -= v[i].size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ans</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= tot; i++)<span class="comment">//查询答案</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (x &lt;= v[i].size())</span><br><span class="line">            <span class="keyword">return</span> v[i][x - <span class="number">1</span>];</span><br><span class="line">        x -= v[i].size();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    T=n;<span class="comment">//注意开个变量记录询问次数，我这里忘了结果就锅了QAQ</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">    build();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= T; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            add(x, y);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; ans(y) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-区间乘，区间加，单点查询"><a href="#7-区间乘，区间加，单点查询" class="headerlink" title="7. 区间乘，区间加，单点查询"></a>7. 区间乘，区间加，单点查询</h4><p>区间乘：设lazy1标记，全初始化为1</p>
+<p>区间加：设lazy2标记</p>
+<p>做法与 <font size=4><strong>1.</strong></font> 相似</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll MAXN = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ = <span class="number">350</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e4</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line">ll n, block, lazy1[block_], b[MAXN], w[MAXN], lazy2[block_];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spread</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//整块处理</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = (x - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= min(x* block, n); i++)</span><br><span class="line">        w[i] = (w[i] * lazy2[x] + lazy1[x]) % mod;<span class="comment">//乘法优先性，先乘后加</span></span><br><span class="line">    lazy1[x] = <span class="number">0</span>;</span><br><span class="line">    lazy2[x] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll opt, ll x, ll y, ll z)</span><span class="comment">//两个标记的优先级是乘法高,所以在乘的时候要将加标记也乘z，其他处理与上边的题类似</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    spread(b[x]);<span class="comment">//先整块处理一下，然后下面暴力</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt;= min(b[x] * block, y); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            w[i] = (w[i] + z) % mod;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            w[i] = w[i] * z % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (b[x] != b[y])</span><br><span class="line">    &#123;</span><br><span class="line">        spread(b[y]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = (b[y] - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= y; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!opt)</span><br><span class="line">                w[i] = (w[i] + z) % mod;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                w[i] = w[i] * z % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[x] + <span class="number">1</span>; i &lt;= b[y] - <span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            lazy1[i] = (lazy1[i] + z) % mod;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            lazy1[i] = lazy1[i] * z % mod;</span><br><span class="line">            lazy2[i] = lazy2[i] * z % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">        b[i] = (i - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">        lazy2[b[i]] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; opt &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        <span class="keyword">if</span> (!opt || opt == <span class="number">1</span>)</span><br><span class="line">            add(opt, x, y, z);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; (w[y] * lazy2[b[y]] + lazy1[b[y]]) % mod &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-区间修改，区间询问"><a href="#8-区间修改，区间询问" class="headerlink" title="8.区间修改，区间询问"></a>8.区间修改，区间询问</h4><p> 思路：模拟一些数据可以发现，询问后一整段都会被修改，几次询问后数列可能只剩下几段不同的区间了。维护每个分块是否只有                    一种权值，区间操作的时候，对于同权值的一个块就O(1)统计答案，否则暴力统计答案，并修改标记，不完整的块也暴力。设                    一个lazy标记，初始化为-1，存储区间修改时修改的权值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_=<span class="number">350</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAXN],b[MAXN],lazy[block_],block,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//整块处理</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(lazy[x]==<span class="number">-1</span>) <span class="keyword">return</span>;<span class="comment">//如果整块相同lazy标记为-1就返回</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=(x<span class="number">-1</span>)*block+<span class="number">1</span>;i&lt;=min(x*block,n);i++)</span><br><span class="line">        a[i]=lazy[x];<span class="comment">//将同一块里的权值全都修改</span></span><br><span class="line">    lazy[x]=<span class="number">-1</span>;<span class="comment">//lazy标记初始化</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ans</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> z)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    add(b[x]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&lt;=min(b[x]*block,y);i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]!=z) a[i]=z;</span><br><span class="line">        <span class="keyword">else</span> sum++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(b[x]!=b[y])</span><br><span class="line">    &#123;</span><br><span class="line">        add(b[y]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=(b[y]<span class="number">-1</span>)*block+<span class="number">1</span>;i&lt;=y;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]!=z) a[i]=z;</span><br><span class="line">            <span class="keyword">else</span> sum++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=b[x]+<span class="number">1</span>;i&lt;=b[y]<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(lazy[i]!=<span class="number">-1</span>)<span class="comment">//不为-1整块均为同一个数</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(lazy[i]!=z) lazy[i]=z;<span class="comment">//不为z那么直接将标记修改</span></span><br><span class="line">            <span class="keyword">else</span> sum+=block;<span class="comment">//为z答案直接加上该块的大小</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//为-1暴力枚举</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=(i<span class="number">-1</span>)*block+<span class="number">1</span>;j&lt;=i*block;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(a[j]!=z) a[j]=z;</span><br><span class="line">                <span class="keyword">else</span> sum++;</span><br><span class="line">            &#125;</span><br><span class="line">            lazy[i]=z;<span class="comment">//最后修改标记</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(lazy,<span class="number">-1</span>,<span class="keyword">sizeof</span>(lazy));</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    block=<span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        b[i]=(i<span class="number">-1</span>)/block+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> opt,x,y,z;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans(x,y,z)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-区间查询最小众数（双倍经验题：-洛谷P4168蒲公英-）"><a href="#9-区间查询最小众数（双倍经验题：-洛谷P4168蒲公英-）" class="headerlink" title="9.区间查询最小众数（双倍经验题：**洛谷P4168蒲公英**）"></a>9.区间查询最小众数（双倍经验题：<font size=4>**<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4168">洛谷P4168蒲公英</a>**</font>）</h4><p><del>该题巨复杂（对我这种蒟蒻）</del></p>
+<p><del>通过感性理解</del>，我们发现这个区间的众数不是橙色区间的众数就是蓝色区间出现的任意数。</p>
+<p><img src="https://i.loli.net/2018/11/24/5bf912331b9c0.png" alt="img"></p>
+<p>设橙色部分中任意出现过的数字为$x$，众数为$y$</p>
+<p>若$x$原本的数量加上了在蓝色部分的数量仍然没有$y$原本的数量加上$y$在蓝色部分的数量之和大，那么它是不可能成为众数的。若该数        没出现视其在橙色部分的数量为0即可。若在蓝色部分没出现且本来就不是众数，就更不可能打过众数了。所以我们只需要考虑蓝色        部分出现过的数字并将它和橙色部分的众数作比较即可因为蓝色部分长度和小于两格的长度，所以每次询问最多只需要查两格这么        多，一下就省去了很多时间。理解了这一部分，你就已经会这道题的正解了，剩下的是有一些细节的代码实现</p>
+<p>为了方便，我们需要预处理一个数组$f$和一个数组$s$，$f[i][j]$表示从第$i$个块到第$j$个块中的众数，$s[i][j]$表示在前$i$块中$b[j]$出现的次数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> block_ = <span class="number">350</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, block, w[MAXN], b[MAXN], a[MAXN], f[block_][block_], s[block_][MAXN], t[MAXN]; <span class="comment">// f[i][j]表示i~j块的众数,s[i][j]表示前i块中b[j]出现的次数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build_block</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//该段点所在的块</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x - <span class="number">1</span>) / block + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    m = n;</span><br><span class="line">    block = <span class="built_in">sqrt</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; w[i];</span><br><span class="line">        b[i] = w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(b + <span class="number">1</span>, b + <span class="number">1</span> + n);<span class="comment">//离散化，排序</span></span><br><span class="line">    <span class="keyword">int</span> sum = unique(b + <span class="number">1</span>, b + <span class="number">1</span> + n) - b - <span class="number">1</span>;<span class="comment">//去重返回第一个重复的位置，-b-1就是最后一个不同元素即为不同元素个数</span></span><br><span class="line">    <span class="keyword">int</span> cnt = (n - <span class="number">1</span>) / block + <span class="number">1</span>;<span class="comment">//块的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        a[i] = lower_bound(b + <span class="number">1</span>, b + <span class="number">1</span> + sum, w[i]) - b; <span class="comment">//a存储的是w[i]在b中的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)<span class="comment">//预处理s</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = (i - <span class="number">1</span>) * block + <span class="number">1</span>; j &lt;= min(i * block, n); j++)</span><br><span class="line">            s[i][a[j]]++;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= sum; j++)</span><br><span class="line">            s[i][j] += s[i - <span class="number">1</span>][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++)<span class="comment">//预处理f</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= cnt; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> MAX = f[i][j - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = (j - <span class="number">1</span>) * block + <span class="number">1</span>; k &lt;= min(j * block, n); k++)<span class="comment">//该数比MAX次数多或者比a[MAX]小</span></span><br><span class="line">                <span class="keyword">if</span> (s[j][MAX] - s[i - <span class="number">1</span>][MAX] &lt; s[j][a[k]] - s[i - <span class="number">1</span>][a[k]] ||</span><br><span class="line">                   (s[j][MAX] - s[i - <span class="number">1</span>][MAX] == s[j][a[k]] - s[i - <span class="number">1</span>][a[k]] &amp;&amp; a[k] &lt; MAX))</span><br><span class="line">                    	MAX = a[k];<span class="comment">//就更新</span></span><br><span class="line">            f[i][j] = MAX;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">while</span> (m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l, r;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; l &gt;&gt; r;</span><br><span class="line">        <span class="keyword">int</span> bl = build_block(l);</span><br><span class="line">        <span class="keyword">int</span> br = build_block(r);</span><br><span class="line">        <span class="keyword">int</span> MAX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (br - bl &lt;= <span class="number">1</span>)<span class="comment">//块差小于等于1直接暴力</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)<span class="comment">//通过桶来记录任意数出现次数</span></span><br><span class="line">                t[a[i]]++;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)</span><br><span class="line">                <span class="keyword">if</span> (t[a[i]] &gt; t[MAX] || (t[a[i]] == t[MAX] &amp;&amp; a[i] &lt; MAX))<span class="comment">////更新条件与上相同</span></span><br><span class="line">                    MAX = a[i];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= r; i++)<span class="comment">//最后一定要记住把桶清空！！！！！！！！</span></span><br><span class="line">                t[a[i]] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//大于1的处理方法</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= bl * block; i++)</span><br><span class="line">                t[a[i]]++;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = (br - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= r; i++)</span><br><span class="line">                t[a[i]]++;</span><br><span class="line">            MAX = f[bl + <span class="number">1</span>][br - <span class="number">1</span>];<span class="comment">//中间完整块的众数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= bl * block; i++)<span class="comment">//从左块找</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> pre = s[br - <span class="number">1</span>][MAX] - s[bl][MAX] + t[MAX];<span class="comment">//千万不要放在外面因为一直更新（因为这个一直锅）</span></span><br><span class="line">                <span class="keyword">int</span> now = s[br - <span class="number">1</span>][a[i]] - s[bl][a[i]] + t[a[i]];</span><br><span class="line">                <span class="keyword">if</span> (now &gt; pre || (now == pre &amp;&amp; a[i] &lt; MAX))<span class="comment">//更新条件与上相同</span></span><br><span class="line">                    MAX = a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = (br - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= r; i++)<span class="comment">//从右块找</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> pre = s[br - <span class="number">1</span>][MAX] - s[bl][MAX] + t[MAX];</span><br><span class="line">                <span class="keyword">int</span> now = s[br - <span class="number">1</span>][a[i]] - s[bl][a[i]] + t[a[i]];</span><br><span class="line">                <span class="keyword">if</span> (now &gt; pre || (now == pre &amp;&amp; a[i] &lt; MAX))</span><br><span class="line">                    MAX = a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= bl * block; i++)<span class="comment">//清空</span></span><br><span class="line">                t[a[i]] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = (br - <span class="number">1</span>) * block + <span class="number">1</span>; i &lt;= r; i++)<span class="comment">//清空</span></span><br><span class="line">                t[a[i]] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; b[MAX] &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//答案存在b数组里面</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/%E5%AF%86%E7%A0%81%E7%AE%B1/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            [洛谷] P4296 密码箱
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "chaSYi8FMdJBwzIBpxeNjqWC-gzGzoHsz",
+    app_key: "PqqkLYgPkHvH1BmyQqySWnSK",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> SuperTNT
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="SuperTNT"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/player">播放器</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

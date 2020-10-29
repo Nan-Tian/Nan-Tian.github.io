@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    CRT 与 exCRT |  SuperTNT
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-学习笔记/CRT与exCRT"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  CRT 与 exCRT
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/CRT%E4%B8%8EexCRT/" class="article-date">
+  <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="CRT与exCRT"><a href="#CRT与exCRT" class="headerlink" title="CRT与exCRT"></a>CRT与exCRT</h1><blockquote>
+<h2 id="CRT"><a href="#CRT" class="headerlink" title="CRT"></a><font color=00BFF>CRT</font></h2><p><del>在百度百科与博客的食 用下终于把证明看懂了</del></p>
+<h3 id="引理："><a href="#引理：" class="headerlink" title="引理："></a>引理：</h3><p>引理1：$a\equiv c\pmod b$ 等价于$(a+kb)\equiv c\pmod b$</p>
+<p>引理2：若有$a\equiv c\pmod b，$那么$ka\equiv kc\pmod b$</p>
+<p><font size=5>GRT给出了以下的一元线性同余方程组</font><br>$$<br>\begin{aligned}<br>(S): \begin{cases}<br>x &amp;\equiv a_1\pmod{m_1}<br>\<br>x &amp;\equiv a_2 \pmod{m_2}<br>\<br>&amp;\vdots<br>\<br>x&amp;\equiv a_n\pmod{m_n}<br>\end{cases}<br>\end{aligned}<br>$$</p>
+<h3 id="CRT有解条件："><a href="#CRT有解条件：" class="headerlink" title="CRT有解条件："></a>CRT有解条件：</h3><p>假设整数$m_1,m_2,\cdots,m_n$两两互质，则对任意整数$a_1,a_2,\cdots,a_n$方程组（S）有解</p>
+<h3 id="算法流程："><a href="#算法流程：" class="headerlink" title="算法流程："></a>算法流程：</h3><p>1.设$M=\prod\limits_{i=1}^n m_i,$</p>
+<p>2.设$M_i=\dfrac{M}{m_i},t_i$为$M_i$的逆元（即$t_iM_i\equiv 1\pmod {m_i}$）</p>
+<p>3.计算$C_i=M_it_i$(<strong>不对$m_i$取模</strong>)</p>
+<p>4.方程的通解为$x=kM+\sum\limits_{i=1}^n a_ic_i$</p>
+<p>5.在模$M$意义下方程有唯一解$x=\sum\limits_{i=1}^n a_ic_i \pmod M$($x$即为所有方程余数的和模所有模数积的值)</p>
+<h3 id="算法的证明："><a href="#算法的证明：" class="headerlink" title="算法的证明："></a>算法的证明：</h3><p><font size=3 color="”#FF7F">文字和公式并用，可能有点乱<del>先文字口胡一下</del></font></p>
+<p><font size=3>假设$(1)x\equiv 2\pmod 3,(2)x\equiv 3\pmod 5,(3)x\equiv 7 \mod 2$</font></p>
+<p><font size=3>假设$n_1$是满足（1）式的一个数，$n_2$是满足(2)式的一个数，$n_3$是满足(3)式的一个数</font></p>
+<p><font size=3>根据引理1可知，若$n_2$是$3$的倍数，则$n_1+n_2$也是$3$的倍数，同理可得$n_1+n_2+n_3$也是$3$的倍数,再从$n_2$，$n_3$的角度出发，我们可推导出以下三点：</font></p>
+<p>1.为使$n_1+n_2+n_3$的和满足除以$3$余$2$，$n_2$和$n_3$必须是$3$的倍数。</p>
+<p>2.为使$n_1+n_2+n_3$的和满足除以$5$余$3$，$n_1$和$n_3$必须是$5$的倍数。</p>
+<p>3.为使$n_1+n_2+n_3$的和满足除以$7$余$2$，$n_1$和$n_2$必须是$7$的倍数。</p>
+<p><font size=3>因此，为使$n_1+n_2+n_3$的和作为“孙子问题”的一个最终解，需满足：</font></p>
+<p>1.$n_1$除以$3$余$2$，且是$5$和$7$的公倍数。</p>
+<p>2.$n_2$除以$5$余$3$，且是$3$和$7$的公倍数。</p>
+<p>3.$n_3$除以$7$余$2$，且是$3$和$5$的公倍数。</p>
+<p><font size=3>所以，孙子问题解法的本质是从$5$和$7$的公倍数中找一个除以$3$余$2$的数$n_1$，从$3$和$7$的公倍数中找一个除以$5$余$3$的数$n_2$，从$3$和$5$的公倍数中找一个除以$7$余$2$的数$n_3$，再将三个数相加得到解。在求$n_1，n_2，n_3$时又用了一个小技巧，以$n_1$为例，并非从$5$和$7$的公倍数中直接找一个除以$3$余$2$的数，而是先找一个除以$3$余$1$的数，再乘以$2$。也就是<strong>求出$5$和$7$的公倍数模$3$下的逆元，再用逆元去乘余数</strong>。(引理2可以证明)</font></p>
+<p><font size=5>由此假设</font></p>
+<p><font size=4>设$M=m_1\times m_2\times m_3\cdots\times m_n=\prod\limits_{i=1}^n m_i$ </font></p>
+<p><font size=4>并设$M_i=\dfrac {M}{m_i}$($M_i$即为除了$m_i$以外其他互质数的乘积(最小公倍数))</font></p>
+<p><font size=4>设$t_i$为$M_i$的逆元（即$t_iM_i\equiv 1\pmod {m_i}$）</font></p>
+<p><font size=2 color=#FF7F>$a_it_iM_i$(即相当于逆元乘余数再乘最小公倍数得出$n_i$)</font></p>
+<p>因此$x$的通解为:</p>
+<p>$x=n_1+n_2+\cdots+n_n=a_1C_1+a_2C_2+\cdots+a_nC_n=kM+\sum\limits_{i=1}^{n} a_iC_i$</font></p>
+<p><font size=4>(这里的$x$通解一定为$M$的$k$倍加上一个小于$M$的余数）</font><br><font size=4>最后对M取模可得小于M的唯一解$x=\sum\limits_{i=1}^{n}a_ic_i\pmod M$</font></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(ll a, ll b,ll &amp;x,ll &amp;y)</span><span class="comment">//&amp;是求逆元</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (!b)</span><br><span class="line">   &#123;</span><br><span class="line">       x = <span class="number">1</span>;</span><br><span class="line">       y = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   exgcd(b, a % b);</span><br><span class="line">   <span class="keyword">int</span> k;</span><br><span class="line">   k = x;</span><br><span class="line">   x = y;</span><br><span class="line">   y = k - (a / b) * y;</span><br><span class="line">&gt;&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="built_in">cin</span> &gt;&gt; a[i] &gt;&gt; b[i];</span><br><span class="line">       sum *= a[i];<span class="comment">//求M</span></span><br><span class="line">   &#125;</span><br><span class="line">ll x,y;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">   &#123;</span><br><span class="line">       ll m = sum / a[i];<span class="comment">//求m_i</span></span><br><span class="line">       exgcd(m, a[i]);</span><br><span class="line">       ll t = (x % a[i] + a[i]) % a[i];<span class="comment">//求逆元</span></span><br><span class="line">       ans = (ans + b[i] * m * t) % sum;<span class="comment">//求和</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="exCRT"><a href="#exCRT" class="headerlink" title=" exCRT"></a><font color=00BFF> exCRT</font></h2><p><font size=3>exCRT是为了解决模数不互质的情况<del>深受毒瘤出题人喜爱</del></font></p>
+<p><font size=3>自我感觉和CRT差别很大</font><br>       <font size=3>我们先假设两个式子：</font></p>
+<p>​                                                                <font color=#FF4500>$x=a_1+m_1x_1$</font></p>
+<p>​                                                                <font color=#FF4500>$x=a_2+m_2x_2$</font></p>
+<p>那么得到：</p>
+<p>​                                <font color=#FF4500>$a_1+m_1x_1=a_2+m_2x_2\Rightarrow m_1x_1+m_2x_2=a_1-a_2$($m$为整数)</font></p>
+<p>我们需要求出一个最小正整数解$x$使其满足：</p>
+<p>​                                                        <font color=#FF4500>$x=a_1+m_1x_1=a_2+m_2x_2$</font></p>
+<p>　那么$x_1$和$x_2$就要尽可能的小，于是我们用扩展欧几里得算法求出$x_1$的最小正整数解，将它代回$a_1+m_1x_1$，得到$x$的一个特解$x’$，当然也是最小正整数解。</p>
+<p>所以$x$的通解一定是$x’$加上$lcm(m_1,m_2)∗k$，这样才能保证$x$模$m_1$和$m_2$的余数是$a_1$和$a_2$。由此，我们把这个$x’$当做新的方程的余数，把$lcm(m_1,m_2)$当做新的方程的模数。（这一段是<strong>关键</strong>）</p>
+<p><font size=4>合并完成：</font></p>
+<p>​                                                        <font color=#FF4500>$x\equiv x’ \pmod {lcm\left(m_1,m_2\right)}$</font></p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="function"><span class="keyword">inline</span> ll <span class="title">fast_mul</span><span class="params">(ll a, ll b, ll p)</span><span class="comment">//龟速乘，防爆long long</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   ll t = <span class="number">0</span>;</span><br><span class="line">   a %= p;</span><br><span class="line">   <span class="keyword">while</span> (b)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span> (b &amp; <span class="number">1</span>)</span><br><span class="line">           t = (t + a) % p;</span><br><span class="line">       b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">       a = (a + a) % p;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> t;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;x, ll &amp;y)</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (!b)</span><br><span class="line">   &#123;</span><br><span class="line">       x = <span class="number">1</span>;</span><br><span class="line">       y = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   exgcd(b, a % b, x, y);</span><br><span class="line">   ll k = x;</span><br><span class="line">   x = y;</span><br><span class="line">   y = k - (a / b) * y;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="function">ll <span class="title">gcd</span><span class="params">(ll a, ll b)</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> b ? gcd(b, a % b) : a;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;<span class="function">ll <span class="title">lcm</span><span class="params">(ll a, ll b)</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> a / gcd(a, b) * b;</span><br><span class="line">&gt;&#125;</span><br><span class="line"></span><br><span class="line">&gt;ll n, a[MAXN], b[MAXN];</span><br><span class="line"></span><br><span class="line">&gt;<span class="function">ll <span class="title">exChina</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line">   ll A = a[<span class="number">1</span>], B = b[<span class="number">1</span>], x, y;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++)<span class="comment">//不断合并方程</span></span><br><span class="line">   &#123;</span><br><span class="line">       ll d = gcd(A, a[i]);</span><br><span class="line">       <span class="keyword">if</span> ((b[i] - B) % d)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">       exgcd(A, a[i], x, y);</span><br><span class="line">       ll mod = a[i] / d;</span><br><span class="line">       x = fast_mul(x % mod + mod, (((b[i] - B) / d) % mod) + mod, mod);</span><br><span class="line">       mod = lcm(A, a[i]);</span><br><span class="line">       B = (fast_mul(x, A, mod) + B) % mod;</span><br><span class="line">       A = mod;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> B;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/BSGS%E4%B8%8EexBSGS/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            BSGS 与 exBSGS
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Miller-Rabin/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Miller-Rabin</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "chaSYi8FMdJBwzIBpxeNjqWC-gzGzoHsz",
+    app_key: "PqqkLYgPkHvH1BmyQqySWnSK",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> SuperTNT
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="SuperTNT"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/player">播放器</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i></p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

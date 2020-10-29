@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    [洛谷] P4296 密码箱 |  SuperTNT
+    Miller-Rabin |  SuperTNT
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-题解/密码箱"
+  id="post-学习笔记/Miller-Rabin"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,14 +55,14 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  [洛谷] P4296 密码箱
+  Miller-Rabin
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/%E5%AF%86%E7%A0%81%E7%AE%B1/" class="article-date">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Miller-Rabin/" class="article-date">
   <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
 </a>   
 <div class="word_count">
@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">270</span>
+            <span class="post-count">655</span>
         </span>
     </span>
 
@@ -79,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -94,18 +94,21 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="P4296-密码箱"><a href="#P4296-密码箱" class="headerlink" title="P4296 密码箱"></a>P4296 密码箱</h1><p>题目可转化为$x^2\equiv 1 \pmod n$，</p>
-<p>移项可得$x^2-1 \equiv 0\pmod n$</p>
-<p>根据平方差公式可以得到$(x-1)(x+1)\equiv 0 \pmod n$</p>
-<p>设正整数$k$，使得$(x-1)(x+1)=kn$</p>
-<p>对$n$进行分解,$n= ab$</p>
-<p>原式最终转化为$(x-1)(x+1)=kab$</p>
-<p>则使原式成立条件即为$(a|(x+1) \bigvee b|(x-1))\bigwedge (a|(x-1)\bigvee b|(x+1))$</p>
-<p>在枚举$x$的时候顺便枚举$a,b$</p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.当$x=1$时是唯一无解情况</p>
-<p>2.记住开$long long$</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> TNT</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> b, n;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">&quot;None&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        st.insert(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">1</span>; a &lt;= <span class="built_in">sqrt</span>(n); a++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!(n % a))</span><br><span class="line">            &#123;</span><br><span class="line">                b = n / a;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (ll i = b + <span class="number">1</span>; i &lt;= n; i += b) <span class="comment">//4e9会爆int</span></span><br><span class="line">                    <span class="keyword">if</span> (!((i + <span class="number">1</span>) % a))</span><br><span class="line">                        st.insert(i);</span><br><span class="line">                <span class="keyword">for</span> (ll i = b - <span class="number">1</span>; i &lt;= n; i += b)</span><br><span class="line">                    <span class="keyword">if</span> (!((i - <span class="number">1</span>) % a))</span><br><span class="line">                        st.insert(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator i = st.begin(); i != st.end(); i++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *i);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="comment">// namespace TNT</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    TNT::main();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <h1 id="Miller-Rabin"><a href="#Miller-Rabin" class="headerlink" title="Miller-Rabin"></a>Miller-Rabin</h1><blockquote>
+<p>定理：若$p$为质数，$x$是一个整数，且$x^2\equiv 1\pmod p$,则$x \equiv \pm 1\pmod p$</p>
+<p>证明：变形成$(x-1)(x+1)\equiv 0 \pmod p$</p>
+<p>推论：二次探测</p>
+<p>​            设$a,n$为正整数($n$为奇质数)，且$a&lt;n,n-1=d\times 2^r$($d$为奇数),则要么$a^d\equiv 1\pmod n$要么存在$0\le i\lt r$满足$a^{d\times 2^i}\equiv -1 \pmod n(a^{d\times 2^i }\equiv n-1 \pmod n)$(计算过程中算出来有$x^2$则必定有$x^2 \bmod n=1,x = 1 \or x= n-1$)</p>
+<h2 id="用-Miller-Rabin-来判断质数"><a href="#用-Miller-Rabin-来判断质数" class="headerlink" title="用$Miller-Rabin$来判断质数"></a>用$Miller-Rabin$来判断质数</h2><p>二次探测逆定理，随机选取k个小于n的正整数作为底数a，用上述逆定理验证,时间复杂度$O(k \log n)$,失误率约$4^{-k}$</p>
+<p>​            <font color =#FF4F00>注：对于$10^{18}$以内的数，带入前$9$个素数当$k$即可。</font></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p>（1）对于偶数和 0，1，2 可以直接判断。</p>
+<p>（2）设要测试的数为$n$，我们取一个较小的质数$a$，设 $r,d$，满足$2^rd=n-1$(其中是$d$奇数)。</p>
+<p>（3）我们先算出$a^d$，然后不断地平方并且进行二次探测进行$r$次。</p>
+<p>（4）最后我们根据费马小定律，如果最后$a^{n-1}\not \equiv 1\pmod n$,则说明$n$为合数。</p>
+<p>（5）多次取不同的$k$进行$k$次素数测试，这样可以使正确性更高</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> re register</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> TNT</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">int</span> prime[<span class="number">10</span>] = &#123;<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>&#125;;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">inline</span> ll <span class="title">fast_mul</span><span class="params">(ll x, ll y, ll mod)</span><span class="comment">//龟速乘防爆long long</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     ll ans = <span class="number">0</span>, base = x;</span><br><span class="line">     <span class="keyword">while</span> (y)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">if</span> (y &amp; <span class="number">1</span>)</span><br><span class="line">         &#123;</span><br><span class="line">             ans += base;</span><br><span class="line">             <span class="keyword">if</span> (ans &gt; mod)</span><br><span class="line">                 ans -= mod;</span><br><span class="line">         &#125;</span><br><span class="line">         base &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">         <span class="keyword">if</span> (base &gt; mod)</span><br><span class="line">             base -= mod;</span><br><span class="line">         y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> ans;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">inline</span> ll <span class="title">qpow</span><span class="params">(ll x, ll y, ll mod)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     ll ans = <span class="number">1</span>, base = x;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">while</span> (y)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">if</span> (y &amp; <span class="number">1</span>)</span><br><span class="line">             ans = fast_mul(ans, base, mod);</span><br><span class="line">         base = fast_mul(base, base, mod);</span><br><span class="line">         y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> ans;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">Miller_Rabin</span><span class="params">(ll n)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> r = <span class="number">0</span>;</span><br><span class="line">     ll d = n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (n == <span class="number">2</span>)<span class="comment">//特判</span></span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (n &lt; <span class="number">2</span> || (!(n &amp; <span class="number">1</span>)))<span class="comment">//特判</span></span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">while</span> (!(d &amp; <span class="number">1</span>))<span class="comment">//计算r和d</span></span><br><span class="line">     &#123;</span><br><span class="line">         r++;</span><br><span class="line">         d &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> (re <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span> &amp;&amp; prime[i] &lt; n; i++)<span class="comment">//进行k次</span></span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">int</span> a = prime[i];</span><br><span class="line"></span><br><span class="line">         ll x = qpow(a, d, n);<span class="comment">//先计算a^d</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">for</span> (re <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= r; j++)<span class="comment">//枚举0&lt;j&lt;=r</span></span><br><span class="line">         &#123;</span><br><span class="line">             ll k = fast_mul(x, x, n);<span class="comment">//计算x^2</span></span><br><span class="line"></span><br><span class="line">             <span class="keyword">if</span> (k == <span class="number">1</span> &amp;&amp; x != <span class="number">1</span> &amp;&amp; x != n - <span class="number">1</span>)<span class="comment">//质数成立条件</span></span><br><span class="line">                 <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">             x = k;<span class="comment">//更新x</span></span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span> (x != <span class="number">1</span>)<span class="comment">//若最后x^(n-1) !\equiv 1 \pmod n,不为质数</span></span><br><span class="line">             <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> 	</span>&#123;</span><br><span class="line">     	.......</span><br><span class="line">	&#125;</span><br><span class="line">&#125; <span class="comment">// namespace TNT</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> TNT::main();</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+</blockquote>
  
       <!-- reward -->
       
@@ -134,19 +137,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/UVA1521/" class="article-nav-link">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/CRT%E4%B8%8EexCRT/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            [UVA] UVA 1521 GCD Gussing Game
+            CRT 与 exCRT
           
         </div>
       </a>
     
     
-      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%88%86%E5%9D%97/" class="article-nav-link">
+      <a href="/2020/10/29/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">分块学习笔记</div>
+        <div class="article-nav-title">数学学习笔记</div>
       </a>
     
   </nav>
