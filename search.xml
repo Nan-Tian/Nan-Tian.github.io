@@ -104,7 +104,7 @@
 <p>定理：若$p$为质数，$x$是一个整数，且$x^2\equiv 1\pmod p$,则$x \equiv \pm 1\pmod p$</p>
 <p>证明：变形成$(x-1)(x+1)\equiv 0 \pmod p$</p>
 <p>推论：二次探测</p>
-<p>​            设$a,n$为正整数($n$为奇质数)，且$a&lt;n,n-1=d\times 2^r$($d$为奇数),则要么$a^d\equiv 1\pmod n$要么存在$0\le i\lt r$满足$a^{d\times 2^i}\equiv -1 \pmod n(a^{d\times 2^i }\equiv n-1 \pmod n)$(计算过程中算出来有$x^2$则必定有$x^2 \bmod n=1,x = 1 \or x= n-1$)</p>
+<p>​            设$a,n$为正整数($n$为奇质数)，且$a&lt;n,n-1=d\times 2^r$($d$为奇数),则要么$a^d\equiv 1\pmod n$要么存在$0\le i\lt r$满足$a^{d\times 2^i}\equiv -1 \pmod n(a^{d\times 2^i }\equiv n-1 \pmod n)$(计算过程中算出来有$x^2$则必定有$x^2 \bmod n=1,x = 1 || x= n-1$)</p>
 <h2 id="用-Miller-Rabin-来判断质数"><a href="#用-Miller-Rabin-来判断质数" class="headerlink" title="用$Miller-Rabin$来判断质数"></a>用$Miller-Rabin$来判断质数</h2><p>二次探测逆定理，随机选取k个小于n的正整数作为底数a，用上述逆定理验证,时间复杂度$O(k \log n)$,失误率约$4^{-k}$</p>
 <p>​            <font color =#FF4F00>注：对于$10^{18}$以内的数，带入前$9$个素数当$k$即可。</font></p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p>（1）对于偶数和 0，1，2 可以直接判断。</p>
