@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     SuperTNT
+    [CF] CF1106F Lunar New Year and a Recursive Sequence |  SuperTNT
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -51,10 +51,19 @@
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  [CF] CF1106F Lunar New Year and a Recursive Sequence
+</h1>
+ 
+
+    </header>
      
     <div class="article-meta">
       <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/CF1106F/" class="article-date">
-  <time datetime="2020-10-29T06:29:19.718Z" itemprop="datePublished">2020-10-29</time>
+  <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
@@ -85,10 +94,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<p>title:’[CF] CF1106F Lunar New Year and a Recursive Sequence’<br>date:2020-10-29 </p>
-<hr>
-<h1 id="CF1106F-Lunar-New-Year-and-a-Recursive-Sequence-题解"><a href="#CF1106F-Lunar-New-Year-and-a-Recursive-Sequence-题解" class="headerlink" title="CF1106F Lunar New Year and a Recursive Sequence [题解]"></a>CF1106F Lunar New Year and a Recursive Sequence [题解]</h1><blockquote>
+  <h1 id="CF1106F-Lunar-New-Year-and-a-Recursive-Sequence-题解"><a href="#CF1106F-Lunar-New-Year-and-a-Recursive-Sequence-题解" class="headerlink" title="CF1106F Lunar New Year and a Recursive Sequence [题解]"></a>CF1106F Lunar New Year and a Recursive Sequence [题解]</h1><blockquote>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给出式子$f_i=\prod\limits_{j=1}^k f_{i-j}^{b_j} \pmod {998244353}$，给出$f_n=m$，求$f_k$最小正整数值，为了方便起见我们将$998244353$定义为$p$</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>一眼看上去似乎从$f_n$推是不可行的，通过手模几组小样例可以发现$f_n$只与$f_k$的指数级有关，所以我们思考从$f_k$转移到$f_n$，用一个函数来表示$f_k$的指数，我们设$g(n)$表示第$n$项为$f_k^{g_n}$，则$f_n=f_k^{g_n}$，$g_n=g_{n-1}b_1+g_{n-2}b_2+\cdots+g_{n-k}b_k$，我们不难发现这是个递推式子，我们可以将其用矩阵递推来优化</p>
 <p>我们可以定义矩阵$\begin{bmatrix}g_{n-k},g_{n-k+1},\cdots ,g_{n}\end{bmatrix}$</p>
@@ -132,15 +138,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/P4767/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            (no title)
-          
-        </div>
-      </a>
     
+      <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/CF645E/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">[CF] CF645E</div>
+      </a>
     
   </nav>
 

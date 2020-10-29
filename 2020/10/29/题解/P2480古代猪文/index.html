@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     SuperTNT
+    [洛谷] 古代猪文 |  SuperTNT
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -51,17 +51,26 @@
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  [洛谷] 古代猪文
+</h1>
+ 
+
+    </header>
      
     <div class="article-meta">
       <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/P2480%E5%8F%A4%E4%BB%A3%E7%8C%AA%E6%96%87/" class="article-date">
-  <time datetime="2020-10-29T06:29:19.735Z" itemprop="datePublished">2020-10-29</time>
+  <time datetime="2020-10-28T16:00:00.000Z" itemprop="datePublished">2020-10-29</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">696</span>
+            <span class="post-count">685</span>
         </span>
     </span>
 
@@ -85,10 +94,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <hr>
-<p>title:’[洛谷] 古代猪文’<br>date:2020-10-29 </p>
-<hr>
-<h1 id="古代猪文"><a href="#古代猪文" class="headerlink" title="古代猪文"></a>古代猪文</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2480">题目链接</a></p>
+  <h1 id="古代猪文"><a href="#古代猪文" class="headerlink" title="古代猪文"></a>古代猪文</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2480">题目链接</a></p>
 <p><font size=7>题目其实就是求$g^{\sum\limits_{d|n}^n C^{d}_{n}}\pmod {999911659}$</font></p>
 <p>这道题我感觉挺好的，数论知识的结合性很好</p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>看到这个式子首先想到将$\sum\limits_{d|n}^n C^d_n$卢卡斯定理求组合数暴力求解，然后快速幂求解，但看到数据范围<font size=5>$1\le n,g \le 10^9$,</font>，立马pass，不可做，然后我们考虑其他方法，我们知道给的模数是质数，然后想到扩展欧拉定理$a^b\equiv a^{b\bmod \varphi(p)}\pmod p$，其中，因为$p$是质数，因此$\varphi(p)=p-1$，到此，此式转化为$a^b\equiv a^{b\bmod {p-1}}\pmod p$,看到这里我们会发现该式子与上述所求式子很像，上述式子也可化为$g^{\sum\limits_{d|n}^n C^{d}_{n}\bmod 999911658}\pmod {999911659}$，之后可以直接求(<font color=#FF4F00>讨论区有人没用CRT也过了</font>)或者用CRT，将999911658分解质因数,CRT一求最小解，最后快速幂解决就可以了</p>
@@ -124,7 +130,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            (no title)
+            [CF] CF645E
           
         </div>
       </a>
@@ -132,7 +138,7 @@
     
       <a href="/2020/10/29/%E9%A2%98%E8%A7%A3/P3601%E7%AD%BE%E5%88%B0%E9%A2%98/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title"></div>
+        <div class="article-nav-title">[洛谷] P3601 签到题</div>
       </a>
     
   </nav>
